@@ -1,5 +1,6 @@
 -- 1. List all transactions
-SELECT * FROM transactions;
+SELECT * 
+FROM transactions;
 
 -- 2. List all transactions with columns: transactions.id, products.name, categories.name
 SELECT 
@@ -25,19 +26,26 @@ LIMIT 10 OFFSET 20;
 
 -- 4. List transactions only for 'Radio'
 SELECT *
-FROM transactions
-WHERE product_name = 'Radio';
+FROM 
+    transactions
+WHERE 
+    product_name = 'Radio';
 
 -- 5. List transactions only for 'Radio' between '2024-01-01' and '2024-02-15'
 SELECT *
-FROM transactions
-WHERE product_name = 'Radio'
-AND created_at BETWEEN '2024-01-01' AND '2024-02-15';
+FROM 
+    transactions
+WHERE 
+    product_name = 'Radio'
+AND 
+created_at BETWEEN '2024-01-01' AND '2024-02-15';
 
 -- 6. List transactions for 'Microwave' in February 2024
 SELECT *
-FROM transactions
-WHERE product_name = 'Microwave'
+FROM 
+    transactions
+WHERE 
+    product_name = 'Microwave'
 AND MONTH(created_at) = 2
 AND YEAR(created_at) = 2024;
 
@@ -55,8 +63,10 @@ AND
 
 -- 8. List transactions from TV only in 2024
 SELECT *
-FROM transactions
-WHERE product_name = 'TV'
+FROM 
+    transactions
+WHERE 
+    product_name = 'TV'
 AND YEAR(created_at) = 2024;
 
 -- 9. Count number of transactions that TV has for each year
