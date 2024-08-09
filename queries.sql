@@ -39,7 +39,7 @@ FROM
 WHERE 
     product_name = 'Radio'
 AND 
-created_at BETWEEN '2024-01-01' AND '2024-02-15';
+    created_at BETWEEN '2024-01-01' AND '2024-02-15';
 
 -- 6. List transactions for 'Microwave' in February 2024
 SELECT *
