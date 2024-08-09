@@ -13,7 +13,7 @@ INNER JOIN
 INNER JOIN
     categories ON products.category_id = categories.id;
 
--- 3 List only 10 transactions, starting from record no 21
+-- 3. List only 10 transactions, starting from record no 21
 SELECT 
     transactions.id,
     transactions.product_id
@@ -23,36 +23,41 @@ ORDER BY
     transactions.id
 LIMIT 10 OFFSET 20;
 
--- 4. List transaction only for 'Radio'
+-- 4. List transactions only for 'Radio'
 SELECT *
 FROM transactions
-WHERE product_name ='Radio';
+WHERE product_name = 'Radio';
 
--- 5. List transaction only for 'Radio' between '2024-01-01' and '2024-02-15'
+-- 5. List transactions only for 'Radio' between '2024-01-01' and '2024-02-15'
 SELECT *
 FROM transactions
-WHERE product_name ='Radio'
-AND created_at between '2024-01-01' AND '2024-02-15';
+WHERE product_name = 'Radio'
+AND created_at BETWEEN '2024-01-01' AND '2024-02-15';
 
--- 6. List transaction for 'Microwave' in February 2024
+-- 6. List transactions for 'Microwave' in February 2024
 SELECT *
 FROM transactions
-WHERE product_name ='Microwave'
-AND EXTRACT(MONTH FROM created_at) = 2;
+WHERE product_name = 'Microwave'
+AND MONTH(created_at) = 2
+AND YEAR(created_at) = 2024;
 
--- 7. Sum transaction from Microwave in Feb 2024
+-- 7. Sum transactions from Microwave in February 2024
 SELECT 
-SUM(total) AS total_sum
+    SUM(total) AS total_sum
 FROM 
-transactions 
-WHERE product_name = 'Microwave' 
-AND EXTRACT(MONTH FROM created_at) = 2;
+    transactions 
+WHERE 
+    product_name = 'Microwave'
+AND 
+    MONTH(created_at) = 2
+AND 
+    YEAR(created_at) = 2024;
 
--- 8. List transaction from TV only in 2024
+-- 8. List transactions from TV only in 2024
 SELECT *
 FROM transactions
 WHERE product_name = 'TV'
-AND EXTRACT(YEAR FROM created_at) = 2024;
+AND YEAR(created_at) = 2024;
 
 -- 9. Count number of transactions that TV has for each year
 SELECT 
@@ -65,21 +70,21 @@ WHERE
 GROUP BY 
     YEAR(created_at);
 
--- 10. Sum the qty from all transactions for each products 
+-- 10. Sum the qty from all transactions for each product
 SELECT
-product_name,
-SUM(qty) AS total_qty
+    product_name,
+    SUM(qty) AS total_qty
 FROM transactions
 GROUP BY product_name;
 
--- 11. Find avg total for all transactions
+-- 11. Find average total for all transactions
 SELECT
-AVG(total) AS avg_total
+    AVG(total) AS avg_total
 FROM transactions;
 
 -- 12. Count the number of transactions for each brand
 SELECT
- brands.name AS brand_name,
+    brands.name AS brand_name,
     COUNT(transactions.id) AS transaction_count
 FROM 
     transactions
@@ -90,7 +95,7 @@ INNER JOIN
 GROUP BY 
     brands.name;
 
--- 13 . List the total sales (total) for each brand in the month of March 2024
+-- 13. List the total sales (total) for each brand in the month of March 2024
 SELECT 
     brands.name AS brand_name,
     SUM(transactions.total) AS total_sales
@@ -101,7 +106,8 @@ INNER JOIN
 INNER JOIN
     brands ON products.brand_id = brands.id
 WHERE 
-    transactions.created_at >= '2024-03-01' 
-    AND transactions.created_at < '2024-04-01'
+    MONTH(transactions.created_at) = 3
+AND 
+    YEAR(transactions.created_at) = 2024
 GROUP BY 
     brands.name;
