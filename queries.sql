@@ -47,8 +47,10 @@ FROM
     transactions
 WHERE 
     product_name = 'Microwave'
-AND MONTH(created_at) = 2
-AND YEAR(created_at) = 2024;
+AND 
+    MONTH(created_at) = 2
+AND 
+    YEAR(created_at) = 2024;
 
 -- 7. Sum transactions from Microwave in February 2024
 SELECT 
