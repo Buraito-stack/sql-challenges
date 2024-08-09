@@ -1,6 +1,7 @@
 -- 1. List all transactions
 SELECT * 
-FROM transactions;
+FROM 
+    transactions;
 
 -- 2. List all transactions with columns: transactions.id, products.name, categories.name
 SELECT 
@@ -67,7 +68,8 @@ FROM
     transactions
 WHERE 
     product_name = 'TV'
-AND YEAR(created_at) = 2024;
+AND 
+    YEAR(created_at) = 2024;
 
 -- 9. Count number of transactions that TV has for each year
 SELECT 
@@ -84,13 +86,16 @@ GROUP BY
 SELECT
     product_name,
     SUM(qty) AS total_qty
-FROM transactions
-GROUP BY product_name;
+FROM 
+    transactions
+GROUP BY 
+    product_name;
 
 -- 11. Find average total for all transactions
 SELECT
     AVG(total) AS avg_total
-FROM transactions;
+FROM 
+    transactions;
 
 -- 12. Count the number of transactions for each brand
 SELECT
